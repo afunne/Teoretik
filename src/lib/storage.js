@@ -81,4 +81,11 @@ export function storageUsed() {
   return n;
 }
 
+// Which version of the example theory this browser has received (so a new example is added once).
+const SAMPLE_KEY = PREFIX + 'sample';
+export const sampleVersion = {
+  get: () => localStorage.getItem(SAMPLE_KEY),
+  set: (v) => localStorage.setItem(SAMPLE_KEY, v),
+};
+
 export const STORAGE_BUDGET = 5 * 1024 * 1024; // typical browser limit per site

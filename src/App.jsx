@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { LANGUAGES, newTheory, newBlock, newLink, uid, withText } from './lib/model.js';
-import { listTheories, loadTheory, saveTheory, lastOpened } from './lib/storage.js';
-import { sampleTheory } from './lib/sample.js';
+import { listTheories, loadTheory, saveTheory, lastOpened, sampleVersion } from './lib/storage.js';
+import { sampleTheory, SAMPLE_VERSION } from './lib/sample.js';
 import { useConfirm } from './hooks/useConfirm.jsx';
 import { useToast } from './hooks/useToast.jsx';
 import TopBar from './components/TopBar.jsx';
@@ -85,8 +85,14 @@ export default function App() {
     lastOpened.set(t.id);
   }, [persist, toast]);
 
-  // first launch: create the example theory, then open the last one used
+  // first launch (or a new example theory): add the example and open it; otherwise open the last one used
   useEffect(() => {
+    if (sampleVersion.get() !== SAMPLE_VERSION) {
+      const sample = saveTheory(sampleTheory());
+      sampleVersion.set(SAMPLE_VERSION);
+      openTheory(sample.id);
+      return;
+    }
     let items = listTheories();
     if (!items.length) {
       saveTheory(sampleTheory());
