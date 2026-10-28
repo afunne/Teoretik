@@ -1,0 +1,20 @@
+{
+  "name": "teoretik",
+  "version": "0.2.0",
+  "private": true,
+  "description": "A retro theory board - write theories as blocks, connect the dots, explain them in several languages.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.0.0"
+  }
+}
