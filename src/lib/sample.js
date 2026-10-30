@@ -1,33 +1,9 @@
 // Example theory shown on first launch: Deltarune's Forgotten Man (facts as of Chapter 5).
 import { newTheory, newBlock, newLink } from './model.js';
+import { TREE_ROOM, EGG } from './sampleImages.js';
 
 /** Bump this when the example changes, so existing users get the new one once. */
-export const SAMPLE_VERSION = 'forgotten-man-1';
-
-const svgData = (svg) => 'data:image/svg+xml,' + encodeURIComponent(svg);
-
-// Simple original illustrations in the app's palette (not game art).
-const TREE = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 150">
-  <rect width="320" height="150" fill="#c6c7b8"/>
-  <g fill="#1d2038">${Array.from({ length: 10 }, (_, r) => Array.from({ length: 3 }, (_, c) => `<circle cx="${292 + c * 9}" cy="${12 + r * 13}" r="2"/>`).join('')).join('')}</g>
-  <rect x="0" y="128" width="320" height="22" fill="#e7e6d6" stroke="#1d2038" stroke-width="3"/>
-  <rect x="148" y="86" width="24" height="44" fill="#1d2038"/>
-  <g fill="#b0462a" stroke="#1d2038" stroke-width="4">
-    <rect x="112" y="58" width="96" height="34"/>
-    <rect x="124" y="32" width="72" height="30"/>
-    <rect x="140" y="12" width="40" height="24"/>
-  </g>
-  <rect x="172" y="104" width="10" height="20" fill="#1d2038" opacity=".55"/>
-  <text x="12" y="22" font-family="monospace" font-size="13" font-weight="700" fill="#1d2038">? BEHIND</text>
-</svg>`);
-
-const EGG = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 150">
-  <rect width="320" height="150" fill="#26296b"/>
-  <g fill="#e7e6d6" opacity=".25">${Array.from({ length: 9 }, (_, r) => Array.from({ length: 34 }, (_, c) => `<circle cx="${6 + c * 9.4}" cy="${8 + r * 17}" r="1.4"/>`).join('')).join('')}</g>
-  <ellipse cx="160" cy="80" rx="34" ry="44" fill="#e7e6d6" stroke="#1d2038" stroke-width="5"/>
-  <path d="M142 62 q8 -14 18 -16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-  <text x="12" y="138" font-family="monospace" font-size="13" fill="#e7e6d6">EGG 1 / 5</text>
-</svg>`);
+export const SAMPLE_VERSION = 'forgotten-man-2';
 
 const block = (x, y, kind, content, image = null) => {
   const b = newBlock(x, y, kind);
@@ -38,6 +14,7 @@ const block = (x, y, kind, content, image = null) => {
 
 export function sampleTheory() {
   const t = newTheory('Deltarune: who is the Forgotten Man?', ['en', 'et']);
+  t.id = 'example-forgotten-man'; // fixed id, so a newer example version replaces this one
 
   const question = block(0, -60, 'question', {
     en: {
@@ -50,7 +27,7 @@ export function sampleTheory() {
       summary: 'Mees, kes peidab end alati puu taha, annab Krisile igas peatükis Muna ja lakkab siis olemast.',
       body: 'Ta on ilmunud kõigis viies peatükis, alati salajases ruumis ja alati sama tüüpi punaste lehtedega puu taga nagu 1. peatüki metsas. Kris kohtub temaga alati üksi.\n\nKeegi pole tema nägu näinud ja mäng nimetab teda ainult "meheks" või Unustatud Meheks. Selle ploki ümber on kolm peamist vastust.',
     },
-  }, TREE);
+  }, TREE_ROOM);
 
   const kris = block(-440, -60, 'claim', {
     en: {
